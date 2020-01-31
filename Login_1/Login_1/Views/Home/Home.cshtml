@@ -1,0 +1,80 @@
+﻿@model Login_1.Models.UserDetails
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<script type="text/javascript">
+    function emailTester() {
+        var val1 = document.getElementById("Mail").value;
+        if (val1.match(/^\w+([\.-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+
+        }
+        else {
+            $('#ErrorMsg').show();
+            $('#Mail').focus();
+            document.getElementById("Mail").value = '';
+        }
+
+    };
+
+    function phoneNumberTester() {
+        var val1 = document.getElementById("PhoneNumber").value;
+        if (isNaN(val1)) {
+            $('#ErrorMsgPhoneTxt').show();
+            $('#PhoneNumber').focus();
+            document.getElementById("PhoneNumber").value = '';
+        }
+        else {
+            if (val1.length > 10 || val1.length < 10) {
+                $('#ErrorMsgPhoneLen').show();
+                $('#PhoneNumber').focus();
+                document.getElementById("PhoneNumber").value = '';
+            }
+            else {
+                $('.btn btn-primary').focus();
+            }
+
+        }
+
+        function JobRoleSelector() {
+            var val = document.getElementById("Role").value;
+        }
+    };
+
+</script>
+
+<div class="jumbotron">
+    @using (Html.BeginForm("InputDetails", "Home", FormMethod.Post))
+    {
+    <div class="form-group">
+        <label for="InputEmail1">Email address</label>
+        @Html.TextBoxFor(m => m.Mail, new Dictionary<string, object> { { "autocomplete", "off" }, { "Id", "Mail" }, { "type", "email" }, { "class", "form-control" }, { "aria-describedby", "emailHelp" }, { "placeholder", "Enter email" }, { "required", "" }, { "autofocus", "" }, { "onchange", "emailTester()" } })
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <div class="form-group">
+            <label style="color:#DC143C">@TempData["alertMessage"]</label>
+            <label class="form-text text-muted" style="color:#DC143C;display:none;" id="ErrorMsg">please enter your email address</label>
+        </div>
+    </div>
+
+        <div class="form-group">
+            <label for="InputPhoneNumber">Phone Number</label>
+            @Html.TextBoxFor(m => m.PhoneNumber, new Dictionary<string, object> { { "autocomplete", "off" }, { "Id", "PhoneNumber" }, { "type", "text" }, { "class", "form-control" }, { "aria-describedby", "emailHelp" }, { "placeholder", "Enter Phone Number" }, { "required", "" }, { "onchange", "phoneNumberTester()" } })
+        </div>
+        <div class="form-group">
+            <label class="form-text text-muted" style="color:#DC143C;display:none;" id="ErrorMsgPhoneTxt">Phone Number should be Digits</label>
+            <label class="form-text text-muted" style="color:#DC143C;display:none;" id="ErrorMsgPhoneLen">Phone Number should be 10 Digits</label>
+        </div>
+        <div class="form-group">
+            <label for="Role">Job Role</label>
+            @Html.DropDownListFor(m=>m.JobId,ViewBag.JobRoles as SelectList ,"Select Your Role",new Dictionary<string,object>{ { "autocomplete", "off" }, { "Id", "Role" },  { "class", "form-control" },{ "required", "" }, { "autofocus", "" }, { "onchange", "JobRoleSelector" }})
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    }
+
+</div>
+
+<div class="row">
+
+</div>
+
+

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ASP.NETModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="interviewee">
+    <Key>
+      <PropertyRef Name="Mail" />
+    </Key>
+    <Property Name="Mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="int" Nullable="false" />
+    <Property Name="Marks" Type="int" />
+    <Property Name="JobID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobRoles">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobRole" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_login">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__interview__JobID__182C9B23">
+    <End Role="JobRoles" Type="Self.JobRoles" Multiplicity="1" />
+    <End Role="interviewee" Type="Self.interviewee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobRoles">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="interviewee">
+        <PropertyRef Name="JobID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ASPNETModelStoreContainer">
+    <EntitySet Name="interviewee" EntityType="Self.interviewee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="JobRoles" EntityType="Self.JobRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_login" EntityType="Self.tbl_login" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__interview__JobID__182C9B23" Association="Self.FK__interview__JobID__182C9B23">
+      <End Role="JobRoles" EntitySet="JobRoles" />
+      <End Role="interviewee" EntitySet="interviewee" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

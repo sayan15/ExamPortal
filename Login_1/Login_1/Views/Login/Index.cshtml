@@ -1,0 +1,48 @@
+﻿@model Login_1.Models.UserNameAndPassword
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<div class="clear-loading spinner">
+    <span></span>
+</div>
+<div class="w3ls-login box box--big">
+    <!-- form starts here -->
+    @using (Html.BeginForm("showDetails", "Login", FormMethod.Post))
+    {
+        <div class="agile-field-txt">
+            <label class="agile-right" style="color:#DC143C">@TempData["Alert"]</label>
+        </div>
+        <div class="agile-field-txt">
+            <label><i class="fa fa-user" aria-hidden="true"></i> @Html.LabelFor(m => m.Username)</label>
+            @Html.TextBoxFor(m => m.Username, new Dictionary<string, object> { { "name", "name" }, { "placeholder", "Enter User Name" }, { "required", "" } })
+        </div>
+        <div class="agile-field-txt">
+            <label><i class="fa fa-unlock-alt" aria-hidden="true"></i>@Html.LabelFor(m => m.password)</label>
+            @Html.PasswordFor(m => m.password, new Dictionary<string, object> { { "name", "name" }, { "placeholder", "Enter Password" }, { "required", "" }, { "id", "myInput" } })
+            <div class="agile_label">
+                <input id="check3" name="check3" type="checkbox" value="show password" onclick="myFunction()">
+                <label class="check" for="check3">Show password</label>
+            </div>
+            <div class="agile-right">
+                <a href="#">forgot password?</a>
+            </div>
+        </div>
+        <!-- script for show password -->
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myInput");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
+        <!-- //end script -->
+        <input type="submit" value="LOGIN">
+
+
+    }
+</div>

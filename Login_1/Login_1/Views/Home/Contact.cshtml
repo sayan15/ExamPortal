@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+    <script type="text/javascript">
+        var sec = 1800, secpass,url;
+        function test() {
+             ;
+        };
+        
+        var     countDown   = setInterval(function () {
+        
+                    secpass();
+        }, 1000);
+
+        function secpass() {
+            'use strict';
+
+            var min = Math.floor(sec / 60),
+                remSec = sec % 60;
+
+            if (remSec < 10) {
+
+                remSec = '0' + remSec;
+
+            }
+            if (min < 10) {
+
+                min = '0' + min;
+
+            }
+            url = new URL(window.location + "?myVar=" + sec)
+            window.location=url;
+            document.getElementById("stopWatchDisplay").innerHTML = min + ":" + remSec;
+            document.getElementById("demo").innerHTML = url.toString();
+            if (sec > 0) {
+
+                sec = sec - 1;
+
+            } else {
+
+                clearInterval(countDown);1
+
+            }
+        }
+    </script>
+<p Id="demo" ></p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-11" style="background-color:#aaa;">
+            <p id="demo"></p>
+        </div>
+        <div  >
+            <div>
+                <p id="stopWatchDisplay" style="font-size:18px; font-weight:bold; font-family:cursive; color:crimson;">Stopwatch Display Here</p>
+                <button onclick="test()">Test</button>
+            </div>
+        </div>
+    </div>
+</div>
